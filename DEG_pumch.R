@@ -1,8 +1,8 @@
 #Y en este script vamos a hacer el DEG
-ctsd_exp <-FetchData(mieloide_pumch, vars = "CTSD")
-threshold <-median(ctsd_exp$CTSD)
-mieloide_pumch$CTSD_group <-ifelse(ctsd_exp$CTSD>threshold, "high", "low")
-Idents(mieloide_pumch)<-"CTSD_group"
+genX_exp <-FetchData(mieloide_pumch, vars = "GenX")
+threshold <-median(genX_exp$GenX)
+mieloide_pumch$GenX_group <-ifelse(GenX_exp$GenX>threshold, "high", "low")
+Idents(mieloide_pumch)<-"GenX_group"
 deg_pumch <-FindMarkers(
   mieloide_pumch,
   ident.1 = "high",
@@ -36,5 +36,5 @@ write.csv(genes_low_pumch, "genes_low_pumch.csv", row.names = FALSE)
 #vemos los 10 mas y menos expresados
 top_up_pumch <- rownames(deg_pumch[order(-deg_pumch$avg_log2FC), ])[1:10]
 top_low_pumch <- rownames(deg_pumch[order(deg_pumch$avg_log2FC), ])[1:10]
-write.csv(top_up_pumch, "top10_ctsd_high_pumch.csv")
-write.csv(top_low_pumch, "top10_ctsd_low_pumch.csv")
+write.csv(top_up_pumch, "top10_genx_high_pumch.csv")
+write.csv(top_low_pumch, "top10_genx_low_pumch.csv")
